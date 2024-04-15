@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block contenido %}
+  <H1>Administración Productos</H1>
+
+  <form id="form_producto">
+    <legend>Formulario de Productos</legend>
+    <div class="form-group">
+        <label for="txt_producto_nombre">Nombre Producto</label>
+        <input id="txt_producto_nombre" type="text" class="form-control" placeholder="Ingrese Producto"></input>
+    </div>
+    <div class="form-group">
+        <label for="txt_producto_precio">Precio</label>
+        <input id="txt_producto_precio" type="text" class="form-control" placeholder="21990"></input>
+    </div>
+    <div class="form-group">
+        <label for="txt_producto_descripcion">Descripción</label>
+        <input id="txt_producto_descripcion" type="text" class="form-control" placeholder="Ingrese una descripción"></input>
+    </div>
+    <div class="form-group">
+        <label for="txt_producto_imagen">Imagen Producto</label>
+        <input id="txt_producto_imagen" type="file" class="form-control" placeholder="Ingrese Contraseña"></input>
+    </div>
+    <br>
+    <div class="text-center">
+        <button type="submit" id="btn_agregar_prod" class="btn btn-success">Agregar Producto</button>         
+    </div>
+    
+</form>
+<br><br>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre Producto</th>
+      <th>Precio</th>
+      <th>Descripción</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Guantes Boxeo</td>
+      <td>21990</td>
+      <td>bla bla</td>
+      <td>Modificar | Eliminar</td>
+    </tr>
+
+  </tbody>
+  
+</table>
+
+{% endblock contenido %}
