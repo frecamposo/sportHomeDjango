@@ -143,20 +143,29 @@
                   Categorías
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="natacion.html">Natacion</a></li>
-                  <li><a class="dropdown-item" href="futbol.html">Futbol</a></li>
-                  <li><a class="dropdown-item" href="voleyball.html">Voleyball</a></li>
-                  <li><a class="dropdown-item" href="basquetball.html">Basquetball</a></li>
-                  <li><a class="dropdown-item" href="tenis.html">Tennis</a></li>
+                  <li><a class="dropdown-item" href="{% url 'NA' %}">Natacion</a></li>
+                  <li><a class="dropdown-item" href="{% url 'FB' %}">Futbol</a></li>
+                  <li><a class="dropdown-item" href="{% url 'VB' %}">Voleyball</a></li>
+                  <li><a class="dropdown-item" href="{% url 'BB' %}">Basquetball</a></li>
+                  <li><a class="dropdown-item" href="{% url 'TE' %}">Tennis</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
                     <a class="dropdown-item" href="producto.html">Ofertas</a>
                   </li>
                 </ul>
               </li>
+              {% if user.is_authenticated %}
               <li>
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" >Bienvenido: {{user.first_name}} {{user.last_name}} : Rol:{{request.session.perfil}}</a>
               </li>
+              <li>
+                <a class="nav-link" href="{% url 'CS' %}">Cerrar Sesion</a>
+              </li>
+              {% else %}
+              <li>
+                <a class="nav-link" href="{% url 'LG' %}">Login</a>
+              </li>
+              {% endif %}
             </ul>
 
             <form class="d-flex" role="search">
