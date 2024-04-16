@@ -8,3 +8,5 @@ def index(request):
 def quienes_somos(request):
     return render(request, 'core\quienes_somos.html')
 
+def admin_prod(request):
+    return render(request, 'admin/admin_prod.html')
