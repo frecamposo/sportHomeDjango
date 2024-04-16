@@ -154,6 +154,12 @@
           {% if user.is_authenticated %}
           <li>
               <a class="nav-link" >Bienvenido: {{user.first_name}} {{user.last_name}} : Rol: </a>
+              {% if perms.web.view_articulo %}
+              <li>
+                <a class="nav-link" href="{% url 'ART' %}">Admin. Articulos</a>
+              </li>
+
+              {% endif %}
               <li>
                 <a class="nav-link" href="{% url 'CS' %}">Cerrar Sesion</a>
               </li>
