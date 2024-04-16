@@ -38,14 +38,39 @@
         <h2>Creacion de Cuenta</h2>
       </div>
       <div style="padding: 30px; border: 1px solid black">
-        <form class="row g-3" id="formulario" onsubmit="return valida()">
+        <form class="row g-3" id="formulario" onsubmit="return valida()" action="{% url 'RE' %}" method="POST">
+          {% csrf_token %}
+           <div class="col-md-6">
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputNombre"
+              name="Nombre"
+              required
+              placeholder="ingrese su nombre"
+            />
+          </div>
+          
+           <div class="col-md-6">
+            <label for="inputApellido" class="form-label">Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputApellido"
+              name="Apellido"
+              required
+              placeholder="ingrese su apellido"
+            />
+          </div>
+          
           <div class="col-md-4">
             <label for="inputUsuario" class="form-label">Usuario</label>
             <input
               type="text"
               class="form-control"
               id="inputUsuario"
-              name="inputUsuario"
+              name="Usuario"
               placeholder="ingrese nombre de usuario"
               required
             />
@@ -57,7 +82,7 @@
               type="password"
               class="form-control"
               id="inputPassword1"
-              name="inputPassword1"
+              name="Password"
               placeholder="ingrese contraseña"
               required
               pattern="(?=.*\d)(?=.*[A-Z]).*"
@@ -89,70 +114,21 @@
               type="email"
               class="form-control"
               id="inputEmail"
-              name="inputEmail"
+              name="Email"
               required
               placeholder="ingrese su email"
             />
           </div>
 
-          <div class="col-12">
-            <label for="inputDireccion" class="form-label">Direccion</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputDireccion"
-              name="inputDireccion"
-              placeholder="1234 Avenida"
-              required
-            />
-          </div>
-
-          <div class="col-md-6">
-            <label for="inputCiudad" class="form-label">Ciudad</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputCiudad"
-              name="inputCiudad"
-              required
-              placeholder="ingrese su ciudad"
-            />
-          </div>
-
-          <div class="col-md-4">
-            <label for="inputComuna" class="form-label">Comuna</label>
-            <select
-              id="inputComuna"
-              name="inputComuna"
-              class="form-select"
-              required
-            >
-              <option selected>Seleccione...</option>
-              <option value="1">Cerrillos</option>
-              <option value="2">Cerro Navia</option>
-              <option value="3">Conchali</option>
-              <option value="4">El Bosque</option>
-              <option value="5">Huechuraba</option>
-              <option value="6">Independencia</option>
-              <option value="7">La Cisterna</option>
-              <option value="8">La Florida</option>
-              <option value="9">La Granja</option>
-              <option value="10">La Pintana</option>
-              <option value="11">La Reina</option>
-              <option value="12">Las Condes</option>
-              <option value="13">Lo Barnechea</option>
-              <option value="14">Lo Espejo</option>
-              <option value="15">Lo Prado</option>
-              <option value="16">Macul</option>
-              <option>...</option>
-            </select>
-          </div>
 
           <div class="col-12">
             <button type="submit" class="btn btn-primary">Grabar</button>
             <button type="reset" class="btn btn-primary">Limpiar</button>
           </div>
         </form>
+      </div>
+      <div style="text-align:center">
+        <h2>{{mensaje}}</h2>
       </div>
     </div>
 {% endblock contenido %}

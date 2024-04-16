@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login as login_aut,logout
 from django.contrib.auth.decorators import login_required,permission_required
 from .models import Marcas, Articulo, UserProfile
+from django.contrib.auth.models import User
 # Create your views here. (metodo en python que permita render de pag web)
 
 def index(request): 
@@ -39,6 +40,27 @@ def sucursales(request):
 def producto(request):
     return render(request, 'core/producto.html')
 
+def grabar_usuario(request):
+    contexto={}
+    if request.POST:
+        Usuario=request.POST.get('Usuario')
+        Password=request.POST.get('Password')
+        Nombre=request.POST.get('Nombre')
+        Email=request.POST.get('Email')
+        Apellido=request.POST.get('Apellido')
+        try:
+            us= User()
+            us.username=Usuario
+            us.first_name=Nombre
+            us.last_name=Apellido
+            us.email= Email
+            us.set_password(Password)
+            us.save()
+            contexto["mensaje"]="usuario Grabado"
+        except:
+            contexto["mensaje"]="problemas al grabar el usuario, revise sus datos"
+    return render(request,"core/registro.html",contexto)
+        
 def login(request):
     contexto={}
     if request.method == 'POST':
