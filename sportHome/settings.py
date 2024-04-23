@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'API',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -75,10 +78,14 @@ WSGI_APPLICATION = 'sportHome.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+ "default": {
+        "ENGINE": "django.db.backends.oracle",
+        "NAME": "orcl",
+        "USER": "sportHome",
+        "PASSWORD": "sportHome",
+        "HOST": "localhost",
+        "PORT": "1522",
+    }  
 }
 
 
@@ -135,3 +142,10 @@ ROLE=(
     ('admin','Administrador'),
     ('cliente','Cliente'),
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
