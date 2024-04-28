@@ -2,10 +2,10 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate,login as login_aut,logout
 from django.contrib.auth.decorators import login_required,permission_required
-from .models import Marcas, Articulo, UserProfile
+from .models import Marcas, Articulo,Categoria, UserProfile
 from django.contrib.auth.models import User
 # Create your views here. (metodo en python que permita render de pag web)
-
+import requests
 def index(request): 
     return render(request, 'core/index.html')
 
@@ -93,6 +93,7 @@ def cerrar_sesion(request):
 def articulos(request):
     contexto={}
     articulos = Articulo.objects.all()
+    categorias= Categoria.objects.all()
     contexto["items"]=articulos
     
     return render(request, 'admin/articulos.html',contexto)
@@ -101,21 +102,33 @@ def articulos(request):
 @permission_required('web.add_articulo',login_url='/login/')
 def agregar(request):
     contexto={}
+    cant = Articulo.objects.all().count()
+    print(cant)
     contexto["marcas"]= Marcas.objects.all()
+    contexto["categorias"]= Categoria.objects.all()
     if request.POST:
         try:
-            Codigo = request.POST.get('Codigo')
+            Codigo = cant+1
             Marca= request.POST.get('Marca')
+            Cate= request.POST.get('Categoria')
             Nombre= request.POST.get('Nombre')
             Descripcion= request.POST.get('Descripcion')
             Precio=request.POST.get('Precio')
             Stock=request.POST.get('Stock')
             obj_marca= Marcas.objects.get(nombre=Marca)
-            art= Articulo(Codigo,obj_marca,Nombre, Descripcion, Precio,Stock)
+            obj_categoria= Categoria.objects.get(nombre=Cate)
+            art= Articulo(
+                marca=obj_marca,
+                categoria=obj_categoria,
+                nombre=Nombre, 
+                description=Descripcion, 
+                precio=Precio,
+                stock=Stock)
             art.save()
             contexto["mensaje"]="Grabado"
-        except:
-            contexto["mensaje"]="problemas al grabar, revise sus datos"
+        except BaseException as error:
+            print(error)
+            contexto["mensaje"]="problemas al grabar, revise sus datos "
     return render(request, 'admin/agregar.html',contexto)
 
 @login_required(login_url='login/')
@@ -128,11 +141,12 @@ def eliminar(request,id):
 @login_required(login_url='login/')
 @permission_required('web.view_articulo',login_url='/login/')
 def modificar_buscar(request, id):
-    art= Articulo.objects.get(codigo=id)
+    art= Articulo.objects.get(id=id)
     contexto={}
     contexto["art"]=art
     print(art.description)
     contexto["items"] = Marcas.objects.all()
+    contexto["categorias"] = Categoria.objects.all()
     return render(request,"admin/modificar.html",contexto)
 
 @login_required(login_url='login/')
@@ -140,17 +154,20 @@ def modificar_buscar(request, id):
 def modificar(request):
     contexto={}
     contexto["marcas"]= Marcas.objects.all()
+    contexto["categorias"]=  Categoria.objects.all()
     if request.POST:
         Codigo = request.POST.get('Codigo')
         Marca= request.POST.get('Marca')
+        Cate=request.POST.get('Categoria')
         Nombre= request.POST.get('Nombre')
         Descripcion= request.POST.get('Descripcion')
         Precio=request.POST.get('Precio')
         Stock=request.POST.get('Stock')
         obj_marca= Marcas.objects.get(nombre=Marca)
-        
+        obj_cate= Categoria.objects.get(nombre=Cate)
         try:
-            art= Articulo.objects.get(codigo=Codigo)
+            art= Articulo.objects.get(id=Codigo)
+            art.categoria= obj_cate
             art.marca= obj_marca
             art.nombre= Nombre
             art.description= Descripcion
@@ -161,3 +178,19 @@ def modificar(request):
         except:
             contexto["mensaje"]="No se pudo actualizar"
     return render(request, 'admin/modificar.html',contexto)
+
+
+def form_api_back(request):
+
+    url= "https://rickandmortyapi.com/api/character"
+    response = requests.get(url)
+    personajes = response.json().get('results',[])
+    context = {
+        'personajes' : personajes
+    }
+    url="http://127.0.0.1:8000/API/lista_articulos"
+    response = requests.get(url)
+    data = response.json().get([])
+    print(data)
+    
+    return render(request, 'admin/articulos_api.html',context)

@@ -3,7 +3,7 @@
 
 {% block contenido %}
 
-    <div class="container" style="margin-top:80px">
+    {% comment %} <div class="container" style="margin-top:80px">
         <table class="table">
             <thead>
               <tr>
@@ -62,6 +62,21 @@
                 });
             }
           </script>
-    </div>
+    </div> {% endcomment %}
 
+<div class="container">
+    <div class="row">
+        {% for personaje in personajes %}
+          <div class="col-md-4">
+            <div  class="card" style="width: 18rem; ">
+              <img src={{personaje.image}} class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{personaje.name}}</h5>
+                <p class="card-text">{{personaje.gender}} </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+  </div>
 {% endblock contenido %}
