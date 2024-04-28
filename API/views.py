@@ -85,7 +85,7 @@ def opt_articulos(request,id_articulo):
 def lista_articulos(request):
     try:
         art = Articulo.objects.all()
-    except Inventario.DoesNotExist:
+    except Articulo.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
