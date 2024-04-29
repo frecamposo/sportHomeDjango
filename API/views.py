@@ -81,7 +81,7 @@ def opt_articulos(request,id_articulo):
 
 @csrf_exempt
 @api_view(['GET','POST'])
-@permission_classes((IsAuthenticated,))
+#@permission_classes((IsAuthenticated,))
 def lista_articulos(request):
     try:
         art = Articulo.objects.all()

@@ -141,7 +141,7 @@ def agregar(request):
 @login_required(login_url='login/')
 @permission_required('web.delete_articulo',login_url='/login/')
 def eliminar(request,id):
-    art = Articulo.objects.get(codigo=id)
+    art = Articulo.objects.get(id=id)
     art.delete()
     return redirect('ART')
 
@@ -190,17 +190,13 @@ def modificar(request):
     return render(request, 'admin/modificar.html',contexto)
 
 
-def form_api_back(request):
-
-    url= "https://rickandmortyapi.com/api/character"
-    response = requests.get(url)
-    personajes = response.json().get('results',[])
-    context = {
-        'personajes' : personajes
-    }
+def form_api(request):
     url="http://127.0.0.1:8000/API/lista_articulos"
     response = requests.get(url)
-    data = response.json().get([])
-    print(data)
-    
+    # data = response.json().get([])
+    print(response.json())
+    data = response.json()
+    context={
+        'articulos': data
+    }
     return render(request, 'admin/articulos_api.html',context)
