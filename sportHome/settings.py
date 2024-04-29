@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'API',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -75,21 +78,21 @@ WSGI_APPLICATION = 'sportHome.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+ "default": {
+        "ENGINE": "django.db.backends.oracle",
+        "NAME": "orcl",
+        "USER": "sportHome",
+        "PASSWORD": "sportHome",
+        "HOST": "localhost",
+        "PORT": "1522",
     }
 }
 
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # } 
 
-#  "default": {
-#         "ENGINE": "django.db.backends.oracle",
-#         "NAME": "xe",
-#         "USER": "sportHome",
-#         "PASSWORD": "sportHome",
-#         "HOST": "localhost",
-#         "PORT": "1521",
-#     }  
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -126,6 +129,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+import os
+MEDIA_URL = '/media/' # indicar el nombre de la carpeta de medios
+MEDIA_ROOT = os.path.join(BASE_DIR,'media') # ubicacion
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -135,3 +142,10 @@ ROLE=(
     ('admin','Administrador'),
     ('cliente','Cliente'),
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}

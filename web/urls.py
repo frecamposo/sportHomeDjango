@@ -23,6 +23,6 @@ urlpatterns = [
     path('eliminar/<id>/',eliminar,name='ELI'),
     path('modificar/<id>/',modificar_buscar,name='MOD'),
     path('modificar_datos/',modificar,name='MODI'),
-    
+    path('articulos_api/',form_api,name='ART_API'),
 
 ]

@@ -1,62 +1,111 @@
-{% extends "core/base.html" %}
-{% load static %}
-{% block contenido %}
-    <div class="container" style="margin-top:150px;border: solid 1px blue;padding:50px">
-       <div width="10%">
-        <form method="POST" action="{% url 'MODI' %}">
-            {% csrf_token %}
-            <div class="form-row">
-              <div class="form-group col-2">
-                <label>Codigo:</label>
-                <input type="hidden" class="form-control" id="Codigo" name="Codigo" value={{art.codigo}}>
-                <input type="text" class="form-control" disabled value={{art.codigo}}>
-              </div>             
-            </div>
-            <div class="form-group col-2">
-                <label>Marca:</label>
-                <select name="Marca" class="form-control"> 
-                   {% for reg in items  %}   
-                    {% if reg.marca == art.marca.nombre %}
-                      <option selected value="{{ reg.nombre }}">{{reg.nombre}}</option>                                                                    
-                    {% else %}
-                      <option value="{{ reg.nombre }}">{{reg.nombre}}</option>
-                    {% endif %}                                        
-                  {% endfor %}
-                </select>
-              </div>
-            <div class="form-group col-md-4">
-              <label>Nombre:</label>
-              <input type="text" class="form-control" name="Nombre" placeholder="ingrese nombre del articulo" value="{{art.nombre}}">
-            </div>
-            <div class="form-group">
-              <label>Descripcion:</label>
-              <textarea class="form-control" name="Descripcion">{{art.description}}</textarea>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label>Precio:</label>
-                <input type="number" class="form-control" name="Precio" value="{{art.precio}}">
-              </div>
-              <div class="form-group col-md-4">
-                <label>Stock:</label>
-                <input type="number" class="form-control" name="Stock" value="{{art.stock}}">
-              </div>
-                            
-            </div>
-            <div style="margin-top:10px">
-                <button type="submit" class="btn btn-primary">Modificar</button>                            
-                <button type="button" onclick="ir()" class="btn btn-primary">Volver Listado</button>
-            </div>
-            <div style="text-align:center;">
-                <h2>{{mensaje}}</h2>
-            </div>
-          </form>
+{% extends "core/base.html" %} {% load static %} {% block contenido %}
+<div
+  class="container"
+  style="margin-top: 150px; border: solid 1px blue; padding: 50px"
+>
+  <div width="10%">
+    <form method="POST" action="{% url 'MODI' %}">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-2">
+          <label>Codigo:</label>
+          <input
+            type="hidden"
+            class="form-control"
+            id="Codigo"
+            name="Codigo"
+            value="{{art.id}}"
+          />
+          <input
+            type="text"
+            class="form-control"
+            disabled
+            value="{{art.id}}"
+          />
         </div>
-    </div>
-    <script>
-        function ir() {
-            location.href="{% url 'ART' %}"
-        }
-    </script>
+      </div>
+      <div class="form-group col-2">
+        <label>Categorias:</label>
+        <select name="Categoria" class="form-control">
+          {% for reg in categorias %} {% if reg.nombre == art.categoria.nombre %}
+          <option selected value="{{ reg.nombre }}">{{reg.nombre}}</option>
+          {% else %}
+          <option value="{{ reg.nombre }}">{{reg.nombre}}</option>
+          {% endif %} {% endfor %}
+        </select>
+      </div>
+      <div class="form-group col-2">
+        <label>Marca:</label>
+        <select name="Marca" class="form-control">
+          {% for reg in items %} {% if reg.marca == art.marca.nombre %}
+          <option selected value="{{ reg.nombre }}">{{reg.nombre}}</option>
+          {% else %}
+          <option value="{{ reg.nombre }}">{{reg.nombre}}</option>
+          {% endif %} {% endfor %}
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Nombre:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Nombre"
+          placeholder="ingrese nombre del articulo"
+          value="{{art.nombre}}"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Foto:</label>
+        <input
+          type="file"
+          class="form-control"
+          name="file"
+          
+        />
+      </div>
+      <div style="margin: 10px;"> Imagen Actual: <a href="{{art.imagen.url}}">{{art.imagen.url}}</a></div> 
+      <div class="form-group">
+        <label>Descripcion:</label>
+        <textarea class="form-control" name="Descripcion">
+{{art.description}}</textarea
+        >
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label>Precio:</label>
+          <input
+            type="number"
+            class="form-control"
+            name="Precio"
+            value="{{art.precio}}"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label>Stock:</label>
+          <input
+            type="number"
+            class="form-control"
+            name="Stock"
+            value="{{art.stock}}"
+          />
+        </div>
+      </div>
+      <div style="margin-top: 10px">
+        <button type="submit" class="btn btn-primary">Modificar</button>
+        <button type="button" onclick="ir()" class="btn btn-primary">
+          Volver Listado
+        </button>
+      </div>
+      <div style="text-align: center">
+        <h2>{{mensaje}}</h2>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  function ir() {
+    location.href = "{% url 'ART' %}";
+  }
+</script>
 
-{% endblock contenido %}    
+{% endblock contenido %}
