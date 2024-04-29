@@ -54,6 +54,16 @@
           value="{{art.nombre}}"
         />
       </div>
+      <div class="form-group col-md-4">
+        <label>Foto:</label>
+        <input
+          type="file"
+          class="form-control"
+          name="file"
+          
+        />
+      </div>
+      <div style="margin: 10px;"> Imagen Actual: <a href="{{art.imagen.url}}">{{art.imagen.url}}</a></div> 
       <div class="form-group">
         <label>Descripcion:</label>
         <textarea class="form-control" name="Descripcion">

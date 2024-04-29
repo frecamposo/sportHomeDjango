@@ -4,7 +4,7 @@
   style="margin-top: 150px; border: solid 1px blue; padding: 50px"
 >
   <div width="10%">
-    <form method="POST" action="{% url 'AGR' %}">
+    <form method="POST" action="{% url 'AGR' %}" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-row">
         {% comment %} <div class="form-group col-2">
@@ -35,6 +35,15 @@
           class="form-control"
           name="Nombre"
           placeholder="ingrese nombre del articulo"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Foto:</label>
+        <input
+          type="file"
+          class="form-control"
+          name="file"
+          
         />
       </div>
       <div class="form-group">

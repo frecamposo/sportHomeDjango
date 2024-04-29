@@ -28,6 +28,7 @@ class Articulo(models.Model):
     marca =  models.ForeignKey(Marcas, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=200,null=False)
+    imagen = models.ImageField(upload_to='fotos',default='fotos/no-disponible.jpg')
     description = models.TextField()
     precio = models.IntegerField()
     stock = models.IntegerField()

@@ -26,7 +26,11 @@ def natacion(request):
 
 @login_required(login_url='/login/')
 def tenis(request):
-    return render(request, 'core/tenis.html')
+    cate = Categoria.objects.get(nombre='tenis')
+    arti = Articulo.objects.all().filter(categoria=cate)
+    print(arti)
+    contexto={"articulos":arti}
+    return render(request, 'core/tenis.html',contexto)
 
 @login_required(login_url='/login/')
 def voleyball(request):
@@ -113,6 +117,7 @@ def agregar(request):
             Cate= request.POST.get('Categoria')
             Nombre= request.POST.get('Nombre')
             Descripcion= request.POST.get('Descripcion')
+            ima  = request.FILES.get("file")
             Precio=request.POST.get('Precio')
             Stock=request.POST.get('Stock')
             obj_marca= Marcas.objects.get(nombre=Marca)
@@ -124,6 +129,8 @@ def agregar(request):
                 description=Descripcion, 
                 precio=Precio,
                 stock=Stock)
+            if ima is not None:
+                art.imagen= ima
             art.save()
             contexto["mensaje"]="Grabado"
         except BaseException as error:
@@ -161,6 +168,7 @@ def modificar(request):
         Cate=request.POST.get('Categoria')
         Nombre= request.POST.get('Nombre')
         Descripcion= request.POST.get('Descripcion')
+        ima  = request.FILES.get("file")
         Precio=request.POST.get('Precio')
         Stock=request.POST.get('Stock')
         obj_marca= Marcas.objects.get(nombre=Marca)
@@ -173,6 +181,8 @@ def modificar(request):
             art.description= Descripcion
             art.precio=Precio
             art.stock= Stock
+            if ima is not None:
+                art.imagen = ima
             art.save()
             contexto["mensaje"]="Actualizado"
         except:
