@@ -14,6 +14,10 @@ def quienes_somos(request):
 
 @login_required(login_url='/login/')
 def futbol(request):
+    cate = Categoria.objects.get(nombre='futbol')
+    arti = Articulo.objects.all().filter(categoria=cate)
+    print(arti)
+    contexto={"articulos":arti}
     return render(request, 'core/futbol.html')
 
 @login_required(login_url='/login/')
@@ -22,6 +26,10 @@ def basquetball(request):
 
 @login_required(login_url='/login/')
 def natacion(request):
+    cate = Categoria.objects.get(nombre='natacion')
+    arti = Articulo.objects.all().filter(categoria=cate)
+    print(arti)
+    contexto={"articulos":arti}
     return render(request, 'core/natacion.html')
 
 @login_required(login_url='/login/')

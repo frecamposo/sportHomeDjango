@@ -1,6 +1,8 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% block contenido %}
+
+
   <section class="py-5 text-center container" style="margin-top: 20px;">
     <div class="row py-lg-5" style="background-image: url({% static 'img/futbol3.jpg' %});background-size: cover;">
       <div class="col-2">
@@ -18,137 +20,16 @@
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        {% for reg in articulos%}
         
         <div class="col">
           <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art1.jpg' %}" width="100%" height="225" alt="">
+            <img src="{{reg.imagen.url}}" width="100%" height="225" alt="">
             <div class="card-body">
-              <p class="card-text">Conos lenteja x50</p>
-              <p class="card-text">$8.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
+              <p class="card-text">{{reg.nombre}}</p>
+              <p class="card-text">$ {{reg.precio}}</p>
 
-                </div>
-                <small class="text-body-secondary">Disponible</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art2.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Faja de entrenamiento</p>
-              <p class="card-text">$11.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
-
-                </div>
-                <small class="text-body-secondary">Disponible</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art3.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Red objetivo</p>
-              <p class="card-text">$6.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
-
-                </div>
-                <small class="text-body-secondary">Disponible</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art4.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Canilleras x2</p>
-              <p class="card-text">$5.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
-
-                </div>
-                <small class="text-body-secondary">Disponible</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art5.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Arco rebotador</p>
-              <p class="card-text">$10.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
-
-                </div>
-                <small class="text-body-secondary">Disponible</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art6.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Balón de fútbol.</p>
-              <p class="card-text">$12.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
-                </div>
-                <small class="text-body-secondary"><p style="color: red;">No Disponible</p></small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art7.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Set entrenamiento agilidad/precisión</p>
-              <p class="card-text">$14.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
-                </div>
-                <small class="text-body-secondary"><p style="color: red;">No Disponible</p></small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art8.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Calcetines antideslizantes</p>
-              <p class="card-text">$3.990</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
@@ -159,23 +40,8 @@
             </div>
           </div>
         </div>
+        {% endfor %}
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'img/futbol/art9.jpg' %}" width="100%" height="225" alt="">
-            <div class="card-body">
-              <p class="card-text">Silbato</p>
-              <p class="card-text">$1.990</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Detalle</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Comprar</button>
-                </div>
-                <small class="text-body-secondary">Disponible</small>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
