@@ -18,7 +18,7 @@ def futbol(request):
     arti = Articulo.objects.all().filter(categoria=cate)
     print(arti)
     contexto={"articulos":arti}
-    return render(request, 'core/futbol.html')
+    return render(request, 'core/futbol.html',contexto)
 
 @login_required(login_url='/login/')
 def basquetball(request):
@@ -30,7 +30,7 @@ def natacion(request):
     arti = Articulo.objects.all().filter(categoria=cate)
     print(arti)
     contexto={"articulos":arti}
-    return render(request, 'core/natacion.html')
+    return render(request, 'core/natacion.html', contexto)
 
 @login_required(login_url='/login/')
 def tenis(request):
