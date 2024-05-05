@@ -81,8 +81,8 @@ DATABASES = {
  "default": {
         "ENGINE": "django.db.backends.oracle",
         "NAME": "orcl",
-        "USER": "sportHome",
-        "PASSWORD": "sportHome",
+        "USER": "sportHome2024",
+        "PASSWORD": "sportHome2024",
         "HOST": "localhost",
         "PORT": "1522",
     }
@@ -149,3 +149,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.dinamosoft.cl'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'freddy.campos@dinamosoft.cl'
+EMAIL_HOST_PASSWORD = 'Isidora.007'
