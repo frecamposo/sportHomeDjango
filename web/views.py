@@ -77,6 +77,11 @@ def grabar_usuario(request):
             us.email= Email
             us.set_password(Password)
             us.save()
+            
+            pro= UserProfile()
+            pro.user=us
+            pro.role='Cliente'
+            pro.save()
             contexto["mensaje"]="usuario Grabado"
         except:
             contexto["mensaje"]="problemas al grabar el usuario, revise sus datos"
