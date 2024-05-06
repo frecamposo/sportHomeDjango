@@ -23,8 +23,12 @@ urlpatterns = [
     path('agregar/',agregar,name='AGR'),
     path('eliminar/<id>/',eliminar,name='ELI'),
     path('modificar/<id>/',modificar_buscar,name='MOD'),
+    path('articulo/<id>/',articulo,name='ARTI'),
+    path('buscar_articulo/<desc>/',buscar_articulo,name='BART'),
+    path('buscar_articulo2/',buscar_articulo2,name='BARTI'),
     path('modificar_datos/',modificar,name='MODI'),
     path('articulos_api/',form_api,name='ART_API'),
+    
 
     path('reset_password/', auth_views.PasswordResetView.as_view(), name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),

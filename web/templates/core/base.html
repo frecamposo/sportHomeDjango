@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32px" href="{% static 'img/favicon.png' %}">
     <title>Sport Home 2024</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
@@ -173,14 +174,18 @@
           {% endif %}
         </ul>
 
-        <form class="d-flex" role="search">
+        <form class="d-flex" role="search" action="{% url 'BARTI'%}" method="post">
           <input
             class="form-control me-2"
             type="search"
+            id="valor"
+            name="valor"
             placeholder="Buscar..."
             aria-label="Search"
           />
-          <button class="btn btn-outline-success" type="submit">
+          <!-- <button class="btn btn-outline-success" type="button" onclick="ir()"> -->
+            {% csrf_token %}
+            <button class="btn btn-outline-success" type="submit">  
             Buscar
           </button>
         </form>
@@ -188,7 +193,12 @@
     </div>
   </nav>
 </header>
-
+<script>
+  function ir() {
+     var data = document.getElementById("valor").value;
+     location.href ='/buscar_articulo/'+data+'/';
+  }
+</script>
 <!-- fin cabecera nav bar-->
 <main>
  

@@ -13,16 +13,29 @@ def quienes_somos(request):
     return render(request, 'core/quienes_somos.html')
 
 @login_required(login_url='/login/')
-def futbol(request):
-    return render(request, 'core/futbol.html')
+def futbol(request):    
+    cate = Categoria.objects.get(nombre='futbol')
+    arti = Articulo.objects.all().filter(categoria=cate)
+    print(arti)
+    contexto={"articulos":arti}
+    return render(request, 'core/futbol.html',contexto)
 
 @login_required(login_url='/login/')
 def basquetball(request):
-    return render(request, 'core/basquetball.html')
+    cate = Categoria.objects.get(nombre='basquetball')
+    arti = Articulo.objects.all().filter(categoria=cate)
+    print(arti)
+    contexto={"articulos":arti}
+    return render(request, 'core/basquetball.html',contexto)
 
 @login_required(login_url='/login/')
 def natacion(request):
-    return render(request, 'core/natacion.html')
+    cate = Categoria.objects.get(nombre='natacion')
+    arti = Articulo.objects.all().filter(categoria=cate)
+    print(arti)
+    contexto={"articulos":arti}
+    return render(request, 'core/natacion.html', contexto)
+
 
 @login_required(login_url='/login/')
 def tenis(request):
@@ -34,7 +47,11 @@ def tenis(request):
 
 @login_required(login_url='/login/')
 def voleyball(request):
-    return render(request, 'core/voleyball.html')
+    cate = Categoria.objects.get(nombre='voleyball')
+    arti = Articulo.objects.all().filter(categoria=cate)
+    print(arti)
+    contexto={"articulos":arti}
+    return render(request, 'core/voleyball.html',contexto)
 
 @login_required(login_url='/login/')
 def sucursales(request):
@@ -191,7 +208,7 @@ def modificar(request):
 
 
 def form_api(request):
-    url="http://127.0.0.1:8000/API/lista_articulos"
+    url="http://127.0.0.1:8500/API/lista_articulos"
     response = requests.get(url)
     # data = response.json().get([])
     print(response.json())
@@ -200,3 +217,27 @@ def form_api(request):
         'articulos': data
     }
     return render(request, 'admin/articulos_api.html',context)
+
+@login_required(login_url='/login/')
+def articulo(request,id):    
+    arti = Articulo.objects.get(id=id)
+    print(arti)
+    contexto={"arti":arti}
+    return render(request, 'core/articulo.html',contexto)
+
+@login_required(login_url='/login/')
+def buscar_articulo(request,desc):    
+    arti = Articulo.objects.filter(description__icontains=desc)
+    print(arti)
+    contexto={"articulos":arti}
+    return render(request, 'core/lista_articulos.html',contexto)
+
+@login_required(login_url='/login/')
+def buscar_articulo2(request):
+    contexto ={}
+    if request.method == 'POST':    
+        desc= request.POST.get('valor')
+        arti = Articulo.objects.filter(description__icontains=desc)
+        print(arti)
+        contexto["articulos"]=arti
+    return render(request, 'core/lista_articulos.html',contexto)

@@ -1,0 +1,99 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block contenido %}
+
+
+  <!-- titulo de articulo pagina-->
+  <section class="py-5 text-center container" style="margin-top: 20px;">
+    <div class="row py-lg-5" style="background-image: url({% static 'img/voley3.jpg' %});background-size: cover;">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light" style="color: aliceblue;">Voleyball</h1>
+        <p class="lead" style="color: aliceblue;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia id dolorem officia odit non! Laudantium quo corporis quae debitis modi dolores voluptas voluptates dolor totam, maxime a officiis consectetur quisquam.<p>
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- contenido del articulo -->
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1">
+        
+        <!-- incio titulo -->
+        <div class="col">
+          <div class="card shadow-sm" style="background-image: url({% static 'img/fondo_deporte.jpg' %});">            
+            <div class="card-body">
+              <p class="card-text" ><h1 style="color: aliceblue;">Articulo {{arti.categoria.nombre}}</h1></p>
+              <div class="d-flex justify-content-between align-items-center">                
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- fin titulo -->
+       
+
+        <div class="col">
+          <div class="row"  style="border: 3px black solid;border-radius: 10px 10px 10px 10px; margin-top: 15px;box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);">
+            <!-- imagen del articulo-->
+            <div class="col-5"  >
+              <img src="{{arti.imagen.url}}" width="90%" height="90%" alt="" srcset="">
+            </div>
+            <!-- fin imagen del articulo-->
+
+            <div class="col-7">
+              <div class="row" >
+                  
+                <!-- Titulo -->
+                  <div style="background-color: #9687b6;">
+                    <h5>{{arti.marca.nombre}}</h5>
+                    <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
+                      {{arti.nombre}}
+                    </h1>
+                  </div>
+                  
+                  <!-- Precio -->
+                  <div style="text-align: right ;padding: 5px;background-color: rgb(202, 202, 37);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                    Precio: ${{arti.precio}}
+                  </div>
+                  
+                  <!-- texto acerca del articulo -->                  
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                      <p class="card-text">
+                        {{arti.description}}
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- otros similares -->
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                      <p class="card-text">Otros Articulos Similares</p>
+                      <img src="{{arti.imagen.url}}" width="20%" alt="">
+                      <img src="{{arti.imagen.url}}" width="20%" alt="">
+                      <img src="{{arti.imagen.url}}" width="20%" alt="">
+                      <img src="{{arti.imagen.url}}" width="20%" alt="">
+                      <div class="d-flex justify-content-between">   
+                        <div class="btn-group" style="margin: auto;margin-top: 30px;">
+                          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="goBack()">Atras</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="javascript:location.href='{% url 'IND'%}'">Home</button>
+                        </div>     
+                        <small class="text-body-secondary">4 Articulos</small>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+function goBack() {
+  window.history.back();
+}
+</script>
+{% endblock contenido %}
