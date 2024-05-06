@@ -199,7 +199,7 @@ def modificar(request):
 
 
 def form_api(request):
-    url="http://127.0.0.1:8000/API/lista_articulos"
+    url="https://fred2004.pythonanywhere.com/API/lista_articulos"
     response = requests.get(url)
     # data = response.json().get([])
     print(response.json())
